@@ -14,6 +14,6 @@
 Auth::routes();
 
 Route::get('/', 'DashboardController@index');
-Route::get('/register-step-2', 'DashboardController@index');
+Route::get('/register-step-2', 'Auth\RegisterStep2Controller@index');
 
 

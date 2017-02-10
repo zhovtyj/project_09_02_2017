@@ -11,11 +11,11 @@ class RegisterStep2Controller extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     public function index()
     {
-        return view('auth.register2.index');
+        return view('auth.register2');
     }
 }

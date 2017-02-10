@@ -14,7 +14,7 @@ class AddClientInfoToUser extends Migration
     public function up()
     {
         Schema::table('users', function($table){
-            $table->integer('userinfo_id')->unsigned()->after('role_id');
+            $table->integer('userinfo_id')->unsigned()->after('role_id')->default('0');
         });
     }
 
