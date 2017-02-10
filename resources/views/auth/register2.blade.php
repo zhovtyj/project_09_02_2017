@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register -> Step 2 of 2</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('register2.store') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
@@ -110,10 +110,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">
-                            <label for="state" class="col-md-4 control-label">State / County *</label>
+                            <label for="state" class="col-md-4 control-label">State / County </label>
 
                             <div class="col-md-6">
-                                <input id="state" type="text" class="form-control" name="state" value="{{ old('state') }}" autofocus required>
+                                <input id="state" type="text" class="form-control" name="state" value="{{ old('state') }}" autofocus>
 
                                 @if ($errors->has('state'))
                                     <span class="help-block">
