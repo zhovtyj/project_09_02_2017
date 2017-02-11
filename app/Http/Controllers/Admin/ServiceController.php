@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Service;
 use Illuminate\Http\Request;
 use Session;
 use Image;
 use Storage;
+use File;
 
 class ServiceController extends Controller
 {
@@ -70,26 +72,53 @@ class ServiceController extends Controller
         return view('admin.service.edit')->withService($service);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $service = Service::find($id);
+
+        $service->name = $request->name;
+        $service->price = $request->price;
+        $service->old_price = $request->old_price;
+        $service->short_description = $request->short_description;
+        $service->description = $request->description;
+        if ($request->active == 'checked'){
+            $service->active = 1;
+        }
+        else{
+            $service->active = 0;
+        }
+
+        if ($request->hasfile('image')){
+            $image = $request->file('image');
+            $filename = time().'.'.$image->getClientOriginalExtension();
+            $location = public_path('upload_images/services/'.$filename);
+            $img = Image::make($image);
+            $img->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save($location);
+
+            $service->image = $filename;
+        }
+
+        $service->save();
+
+        Session::flash('success', 'Service updated successfully');
+
+        return redirect()->route('service.show', $service->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $service = Service::find($id);
+
+        $location = public_path('upload_images/services/'.$service->image);
+        File::delete($location);
+
+        $service->delete();
+
+        Session::flash('success', 'Service was deleted!');
+
+        return redirect()->route('service.index');
     }
 }

@@ -1,0 +1,11 @@
+.service-container{
+    position:relative;
+    height:500px;
+    overflow:hidden;
+}
+.bottom-buttons{
+    position:absolute;
+    left:10px;
+    right:10px;
+    bottom:10px;
+}

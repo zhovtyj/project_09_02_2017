@@ -19,7 +19,7 @@ class CreateServicesTable extends Migration
             $table->string('price');
             $table->string('old_price');
             $table->string('image')->default('');
-            $table->string('short_description');
+            $table->text('short_description');
             $table->text('description');
             $table->boolean('active');
             $table->timestamps();

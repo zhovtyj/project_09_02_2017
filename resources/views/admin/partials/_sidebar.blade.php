@@ -3,16 +3,16 @@
         <ul class="nav" id="main-menu">
 
             <li>
-                <a class="active-menu" href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
+                <a class="{{ Request::is('admin') ? 'active-menu' : '' }}" href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
             </li>
             <li>
-                <a href="{{ route('service.index') }}"><i class="fa fa-qrcode"></i> All Services</a>
+                <a class="{{ Request::is('admin/service') ? 'active-menu' : '' }}" href="{{ route('service.index') }}"><i class="fa fa-qrcode"></i> Services</a>
             </li>
             <li>
-                <a href="ui-elements.html"><i class="fa fa-desktop"></i> Example</a>
+                <a href="{{ route('user.index') }}"><i class="glyphicon glyphicon-user"></i> Clients</a>
             </li>
             <li>
-                <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Example</a>
+                <a href="chart.html"><i class="glyphicon glyphicon-usd"></i> Payments</a>
             </li>
             <li>
                 <a href="table.html"><i class="fa fa-table"></i> Example</a>

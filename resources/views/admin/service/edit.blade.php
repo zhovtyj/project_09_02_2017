@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            {!! Form::model($service, ['route' => ['service.update', $service->id], 'files' => 'true']) !!}
+            {!! Form::model($service, ['route' => ['service.update', $service->id], 'method' => 'PUT', 'files' => 'true']) !!}
 
             {{ Form::label('name', 'Name:') }}
             {{ Form::text('name', null, ['class' => 'form-control', 'required' => '']) }}
@@ -49,10 +49,13 @@
             {{ Form::textarea('description', null, ['class' => 'form-control', 'id' => 'text-editor']) }}
 
             {{ Form::label('active', 'Active:') }}
-            {{ Form::checkbox('active', 'checked', ['class' => 'form-control']) }}
-
+            @if($service->active == 1)
+                {{ Form::checkbox('active', 'checked', true) }}
+            @else
+                {{ Form::checkbox('active', 'checked') }}
+            @endif
             <br />
-            {{ Form::submit('Create Service', ['class' => 'btn btn-success btn-lg btn-block']) }}
+            {{ Form::submit('Save changes', ['class' => 'btn btn-success btn-lg btn-block']) }}
             <br />
             {!! Form::close() !!}
 

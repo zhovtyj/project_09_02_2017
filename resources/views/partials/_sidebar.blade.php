@@ -3,10 +3,10 @@
         <ul class="nav" id="main-menu">
 
             <li>
-                <a class="active-menu" href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
+                <a class="{{ Request::is('/') ? 'active-menu' : '' }}" href="{{route('home')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
             </li>
             <li>
-                <a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>
+                <a class="{{ Request::is('/service') ? 'active-menu' : '' }}" href="{{route('client.services')}}"><i class="fa fa-qrcode"></i> Services</a>
             </li>
             <li>
                 <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Charts</a>
