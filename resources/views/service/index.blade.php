@@ -32,7 +32,7 @@
                                     <div class="bottom-buttons">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <a href="{{ route('service.show', $service->id) }}" class="btn btn-primary btn-block" role="button">
+                                                <a href="{{ route('client.services.show', $service->id) }}" class="btn btn-primary btn-block" role="button">
                                                     <span class="glyphicon glyphicon-eye-open"> </span>
                                                     Read more
                                                 </a>
@@ -58,19 +58,32 @@
 
 @section('javascript')
     <script>
+        //Add Service to the cart
         var url = "{{route('client.addtocart')}}";
         var token = "{{ csrf_token() }}";
         $('.add-to-cart').on('click', function(){
             var  id = $(this).attr("id");
             console.log(id);
-            console.log(token);
             $.ajax({
                 type: "POST",
                 url: url,
                 data: {id:id, _token:token},
                 success: function(data) {
-//                    loadcart();
-//                    showcart();
+                    //Inc Cart count
+                    var cartCount = $('#cart-count').text();
+                    cartCount = Number(cartCount)+1;
+                    $('#cart-count').html(cartCount);
+                    $('.cart-empty').hide();
+                    $('.link-to-cart').show();
+                    $('.append-before').before('' +
+                        '<li>' +
+                            '<a href="/services/'+data.id+'">' +
+                                '<div>' +
+                                    '<i class="glyphicon glyphicon-check"></i>'+data.name+'' +
+                                    '<span class="pull-right text-muted small">'+data.price+'$</span>' +
+                                '</div>' +
+                            '</a>' +
+                        '</li>');
                     console.log(data);
                 }
             });

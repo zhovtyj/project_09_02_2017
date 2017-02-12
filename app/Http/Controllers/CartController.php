@@ -7,9 +7,27 @@ use App\Cart;
 use App\User;
 use App\Service;
 use Auth;
+use Session;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+        $user = User::find(Auth::user()->id);
+        $cart = Cart::where('user_id', $user->id)->get();
+        return view('cart.index')->withCart($cart);
+    }
+
+    public function destroy($id)
+    {
+        $cart = Cart::find($id);
+
+        $cart->delete();
+
+        Session::flash('success', 'Service was deleted from the cart!');
+
+        return redirect()->route('cart.index');
+    }
     public function addToCartAjax(Request $request){
 
         $user = User::find(Auth::user()->id);
@@ -23,6 +41,6 @@ class CartController extends Controller
 
         $cart->save();
 
-        return($service->name.' added to cart');
+        return($service);
     }
 }

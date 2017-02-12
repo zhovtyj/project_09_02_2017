@@ -15,26 +15,51 @@
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                 <i class="glyphicon glyphicon-shopping-cart"></i>
-                @if(isset($cart))
-                    ({{$cart->count()}})
-                    <i class="fa fa-caret-down"></i>
-                @endif
+                <span id="cart-count-container">
+                    @if(isset($cart))
+                        (<span id="cart-count">{{$cart->count()}}</span>)
+                        <i class="fa fa-caret-down"></i>
+                    @endif
+                </span>
             </a>
+            <ul class="dropdown-menu dropdown-alerts" id="cart-items-container">
             @if(isset($cart) && $cart->count() > 0)
-                <ul class="dropdown-menu dropdown-alerts">
-                    @foreach($cart as $cart_item)
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> {{$cart_item->service->name}}
-                                    <span class="pull-right text-muted small">{{$cart_item->service->price}}$</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                    @endforeach
-                </ul>
+                @foreach($cart as $cart_item)
+                    <li>
+                        <a href="{{ route('client.services.show', $cart_item->service->id) }}">
+                            <div>
+                                <i class="glyphicon glyphicon-check"></i> {{$cart_item->service->name}}
+                                <span class="pull-right text-muted small">{{$cart_item->service->price}}$</span>
+                            </div>
+                        </a>
+                    </li>
+                @endforeach
+                <li class="divider append-before"></li>
+                <li>
+                    <a href="{{route('cart.index')}}">
+                        <div>
+                            <i class="glyphicon glyphicon-arrow-right"></i> Go to the cart
+                        </div>
+                    </a>
+                </li>
+            @else
+                <li class="divider append-before link-to-cart"></li>
+                <li class="link-to-cart">
+                    <a href="#">
+                        <div>
+                            <i class="glyphicon glyphicon-arrow-right"></i> Go to the cart
+                        </div>
+                    </a>
+                </li>
+                <li class="cart-empty">
+                    <a href="#">
+                        <div>
+                            <i class="glyphicon glyphicon-check"></i> Cart is empty
+                        </div>
+                    </a>
+                </li>
             @endif
+            </ul>
         </li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
@@ -63,7 +88,7 @@
                     <li>
                         <a href="#">
                             <div>
-                                <strong>Помилки:</strong>
+                                <strong>Errors:</strong>
                                 <span class="pull-right text-muted">
                                     <em>Today</em>
                                 </span>
