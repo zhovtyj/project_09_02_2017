@@ -19,6 +19,11 @@ class User extends Authenticatable
         return $this->hasOne('App\UserInfo');
     }
 
+    public function cart()
+    {
+        return $this->hasMany('App\Cart');
+    }
+
     /**
      * $roles - array which we receive from middleware
      * Check if the user has a role from roles array - so we will know if user has access to the page

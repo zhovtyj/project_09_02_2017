@@ -34,14 +34,14 @@
                                             <div class="col-md-6">
                                                 <a href="{{ route('service.show', $service->id) }}" class="btn btn-primary btn-block" role="button">
                                                     <span class="glyphicon glyphicon-eye-open"> </span>
-                                                    Show
+                                                    Read more
                                                 </a>
                                             </div>
                                             <div class="col-md-6">
-                                                <a href="{{ route('service.edit', $service->id) }}" class="btn btn-success btn-block" role="button">
-                                                    <span class="glyphicon glyphicon-edit"> </span>
-                                                    Edit
-                                                </a>
+                                                <button class="btn btn-success btn-block add-to-cart" role="button" id="{{$service->id}}">
+                                                    <span class="glyphicon glyphicon-shopping-cart"> </span>
+                                                    Add to cart
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -54,5 +54,26 @@
             @endforeach
         </div>
     </div>
+@endsection
 
+@section('javascript')
+    <script>
+        var url = "{{route('client.addtocart')}}";
+        var token = "{{ csrf_token() }}";
+        $('.add-to-cart').on('click', function(){
+            var  id = $(this).attr("id");
+            console.log(id);
+            console.log(token);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {id:id, _token:token},
+                success: function(data) {
+//                    loadcart();
+//                    showcart();
+                    console.log(data);
+                }
+            });
+        });
+    </script>
 @endsection

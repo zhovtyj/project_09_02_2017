@@ -9,7 +9,7 @@
                 <a class="{{ Request::is('admin/service') ? 'active-menu' : '' }}" href="{{ route('service.index') }}"><i class="fa fa-qrcode"></i> Services</a>
             </li>
             <li>
-                <a href="{{ route('user.index') }}"><i class="glyphicon glyphicon-user"></i> Clients</a>
+                <a class="{{ Request::is('admin/user') ? 'active-menu' : '' }}" href="{{ route('client.index') }}"><i class="glyphicon glyphicon-user"></i> Clients</a>
             </li>
             <li>
                 <a href="chart.html"><i class="glyphicon glyphicon-usd"></i> Payments</a>

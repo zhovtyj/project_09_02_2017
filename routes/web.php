@@ -30,10 +30,11 @@ Route::group(['middleware'=>'roles', 'roles'=> ['client']], function(){
     //SERVICES
     Route::get('/services', ['uses' => 'ServicesController@index', 'as' => 'client.services' ]);
 
+    //Add to cart Ajax
+    Route::post('/addtocart', ['uses' => 'CartController@addToCartAjax', 'as' => 'client.addtocart' ]);
+
 
 });
-
-
 
 /****   ADMIN  *****/
 Route::group(['middleware'=>'roles', 'roles'=> ['admin']], function(){
@@ -45,6 +46,6 @@ Route::group(['middleware'=>'roles', 'roles'=> ['admin']], function(){
     Route::resource('admin/service', 'Admin\ServiceController');
 
     //USERS
-    Route::resource('admin/user', 'Admin\UserController');
+    Route::resource('admin/client', 'Admin\UserController');
 
 });

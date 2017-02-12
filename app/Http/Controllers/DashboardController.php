@@ -7,6 +7,7 @@ use App\User;
 use App\UserInfo;
 use App\Role;
 use Auth;
+use App\Cart;
 
 
 class DashboardController extends Controller
@@ -27,6 +28,9 @@ class DashboardController extends Controller
             return redirect()->route('admin.index');
         }
 
-        return view('dashboard.index');
+        $user = User::find(Auth::user()->id);
+        $cart = Cart::where('user_id', $user->id)->get();
+
+        return view('dashboard.index')->withCart($cart);
     }
 }
