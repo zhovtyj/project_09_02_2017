@@ -16,7 +16,7 @@ class User extends Authenticatable
 
     public function userInfo()
     {
-        return $this->hasOne('App\UserInfo');
+        return $this->HasOne('App\UserInfo');
     }
 
     public function cart()

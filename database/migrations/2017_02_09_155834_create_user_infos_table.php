@@ -22,7 +22,7 @@ class CreateUserInfosTable extends Migration
             $table->string('phone');
             $table->string('country');
             $table->string('address1');
-            $table->string('address2');
+            $table->string('address2')->default('');
             $table->string('city');
             $table->string('state');
             $table->string('postcode');

@@ -10,7 +10,7 @@
             </h1>
         </div>
         <div class="col-md-3">
-            <a href="{{ route('service.create')}}" class="btn btn-lg btn-block btn-primary" style="margin-top:20px;"><span class="glyphicon glyphicon-pencil"> </span> Create new</a>
+            <a href="{{ route('client.create')}}" class="btn btn-lg btn-block btn-primary" style="margin-top:20px;"><span class="glyphicon glyphicon-pencil"> </span> Add new client</a>
         </div>
     </div>
     <hr>
@@ -19,17 +19,18 @@
             <table class="table">
                 <thead>
                 <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Email</td>
-                <td>Company</td>
-                <td>Phone</td>
-                <td>Country</td>
-                <td>Address</td>
-                <td>City</td>
-                <td>State</td>
-                <td>Postcode</td>
-                <td>Registered</td>
+                    <td>#</td>
+                    <td>Name</td>
+                    <td>Email</td>
+                    <td>Company</td>
+                    <td>Phone</td>
+                    <td>Country</td>
+                    <td>Address</td>
+                    <td>City</td>
+                    <td>State</td>
+                    <td>Postcode</td>
+                    <td>Registered</td>
+                    <td></td>
                 </tr>
                 </thead>
                 <tbody>
@@ -46,6 +47,14 @@
                         <td>{{$user->state}}</td>
                         <td>{{$user->postcode}}</td>
                         <td>{{$user->created_at}}</td>
+                        <td>
+                            <a class="btn btn-block btn-primary" href="{{route('client.edit', $user->id)}}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            {{ Form::open(['route' => ['client.destroy', $user->id], 'method' =>'DELETE']) }}
+                                <button class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span> </button>
+                            {{ Form::close() }}
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
